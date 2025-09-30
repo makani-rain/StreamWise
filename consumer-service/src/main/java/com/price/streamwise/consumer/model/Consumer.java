@@ -1,10 +1,10 @@
-package com.price.streamwise.consumer_service.model;
+package com.price.streamwise.consumer.model;
 
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 import lombok.Getter;
 import lombok.Setter;

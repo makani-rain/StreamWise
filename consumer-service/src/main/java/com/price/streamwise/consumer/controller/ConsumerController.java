@@ -1,8 +1,10 @@
-package com.price.streamwise.consumer_service.controller;
+package com.price.streamwise.consumer.controller;
 
-import com.price.streamwise.consumer_service.model.Consumer;
-import com.price.streamwise.consumer_service.repository.ConsumerRepository;
 import org.springframework.web.bind.annotation.*;
+
+import com.price.streamwise.consumer.model.Consumer;
+import com.price.streamwise.consumer.repository.ConsumerRepository;
+
 import java.util.List;
 import java.util.UUID;
 

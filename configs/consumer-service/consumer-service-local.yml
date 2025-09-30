@@ -1,5 +1,5 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/consumer_db
-    username: consumer_user
-    password: consumer_pass
+    username: postgres
+    password: postgres

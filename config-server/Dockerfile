@@ -21,6 +21,10 @@ FROM openjdk:17-slim
 #Add volume pointing to /tmp
 VOLUME /tmp
 
+# install curl so docker-compose healthcheck can use it
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
 #Copy unpackaged application to new container
 ARG DEPENDENCY=/target/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib

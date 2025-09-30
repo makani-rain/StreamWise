@@ -30,4 +30,4 @@ COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
 #execute the application
-ENTRYPOINT ["java","-cp",".:lib/*","com.price.streamwise.consumer_service.ConsumerServiceApplication"]
+ENTRYPOINT ["java","-cp",".:lib/*","com.price.streamwise.consumer.ConsumerServiceApplication"]
