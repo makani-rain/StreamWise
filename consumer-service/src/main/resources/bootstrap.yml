@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: consumer-service
+  config:
+    import: configserver:http://configserver:8089/
+  profiles:
+    active: dev
