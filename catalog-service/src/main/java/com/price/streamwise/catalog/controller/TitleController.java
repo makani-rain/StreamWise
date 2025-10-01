@@ -3,7 +3,7 @@ package com.price.streamwise.catalog.controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.price.streamwise.catalog.model.Title;
-import com.price.streamwise.catalog.repository.TitleRepository;
+import com.price.streamwise.catalog.service.TitleService;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,24 +11,35 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/titles")
 public class TitleController {
-    private final TitleRepository repo;
-    public TitleController(TitleRepository repo) { this.repo = repo; }
+    private final TitleService service;
+
+    public TitleController(TitleService service) {
+        this.service = service;
+    }
 
     @GetMapping
-    public List<Title> all() { return repo.findAll(); }
+    public List<Title> all() {
+        return service.findAll();
+    }
 
     @GetMapping("/{id}")
-    public Title get(@PathVariable UUID id) { return repo.findById(id).orElse(null); }
+    public Title get(@PathVariable UUID id) {
+        return service.findById(id);
+    }
 
     @PostMapping
-    public Title create(@RequestBody Title t) { return repo.save(t); }
+    public Title create(@RequestBody Title t) {
+        return service.save(t);
+    }
 
     @PutMapping("/{id}")
     public Title update(@PathVariable UUID id, @RequestBody Title t) {
         t.setTitleId(id);
-        return repo.save(t);
+        return service.save(t);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable UUID id) { repo.deleteById(id); }
+    public void delete(@PathVariable UUID id) {
+        service.delete(id);
+    }
 }
