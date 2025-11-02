@@ -20,3 +20,21 @@ management:
       exposure:
         include: "*"
     enabled-by-default: true
+
+eureka.instance.preferIpAddress: true
+eureka.client.registerWithEureka: true
+eureka.client.fetchRegistry : true
+eureka.client.serviceUrl.defaultZone: http://eurekaserver:8070/eureka/
+
+security.oauth2.resource.userInfoUri: http://authenticationservice:8082/user
+security.oauth2.client.grant-type: client_credentials
+signing.key: "345345fsdfsf5345"
+
+
+keycloak.realm: spmia-realm
+keycloak.auth-server-url: http://keycloak:8080/
+keycloak.ssl-required: external
+keycloak.resource: streamwise
+keycloak.credentials.secret: 5988f899-a5bf-4f76-b15f-f1cd0d2c81ba
+keycloak.use-resource-role-mappings: true
+keycloak.bearer-only: true
