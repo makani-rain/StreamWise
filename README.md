@@ -5,13 +5,13 @@ Semester project for SFWE 510 at University of Arizona, Fall 2025. Microservice 
 `mvn clean package dockerfile:build -DskipTests`
 
 ## To run:
-`docker compose -f .\docker\docker-compose.yml up`
+`docker compose -f .\docker-compose.yml up`
 
 ## To change profiles:
 edit `docker-compose.yml`, replacing "dev" with "prod"
 
 ## To stop:
-`docker compose -f .\docker\docker-compose.yml down -v`
+`docker compose -f .\docker-compose.yml down -v`
 
 ## Testing:
 See included postman collection of example endpoints when running through `docker compose`.
