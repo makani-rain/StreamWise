@@ -1,12 +1,6 @@
 server:
   port: 8072
   
-logstash.host: 3.136.161.26:5000
- 
-logging: 
-  config: classpath:logback-delayed.xml
-  
- 
 eureka:
   instance:
     preferIpAddress: true

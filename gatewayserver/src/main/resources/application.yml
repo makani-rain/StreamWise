@@ -1,10 +1,9 @@
 spring:
-    application:
-     name: gateway-server 
-    cloud:
-        config: 
-            uri: http://configserver:8071
-
+  application:
+    name: gateway-server
+  config:
+    import: configserver:http://configserver:8089/
+    
 logging:
   level:
     com.netflix: WARN
