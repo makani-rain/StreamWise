@@ -14,6 +14,12 @@ spring:
     testWhileIdle: true
     validationQuery: SELECT 1
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://keycloak:8080/realms/StreamWise
+
 management:
   endpoints:
     web:
@@ -39,10 +45,3 @@ keycloak.credentials.secret: "**********"
 keycloak.use-resource-role-mappings: true
 keycloak.bearer-only: true
 
-# Configure Spring Security Resource Server to use Keycloak realm JWKS
-spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://keycloak:8080/realms/StreamWise
