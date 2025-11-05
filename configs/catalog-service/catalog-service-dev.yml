@@ -3,3 +3,6 @@ spring:
     url: jdbc:postgresql://database:5432/catalog_db_dev
     username: postgres
     password: postgres
+
+logging.level.org.springframework.security: DEBUG
+logging.level.org.keycloak: DEBUG
