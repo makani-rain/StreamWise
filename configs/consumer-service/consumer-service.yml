@@ -18,6 +18,16 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://keycloak:8080/realms/StreamWise
+      client:
+        registration:
+          catalog-client:
+            client-id: catalog-client
+            client-secret: catalog-secret
+            authorization-grant-type: client_credentials
+            scope: openid,profile
+        provider:
+          keycloak:
+            token-uri: http://keycloak:8080/realms/StreamWise/protocol/openid-connect/token
 
 management:
   endpoints:
