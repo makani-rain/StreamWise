@@ -44,3 +44,34 @@ keycloak.credentials.secret: "**********"
 keycloak.use-resource-role-mappings: true
 keycloak.bearer-only: true
 
+resilience4j:
+  ratelimiter:
+    instances:
+      catalogService:
+        limitForPeriod: 5
+        limitRefreshPeriod: 5000
+        timeoutDuration: 1000ms
+  circuitbreaker:
+    instances:
+      catalogService:
+        registerHealthIndicator: true
+        ringBufferSizeInClosedState: 5
+        ringBufferSizeInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        recordExceptions:
+          - org.springframework.web.client.HttpServerErrorException
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+          - org.springframework.web.client.ResourceAccessException
+  bulkhead:
+    instances:
+      bulkheadCatalogService:
+        maxWaitDuration: 2ms
+        maxConcurrentCalls: 20
+  thread-pool-bulkhead:
+    instances:
+      bulkheadCatalogService:
+        maxThreadPoolSize: 1
+        coreThreadPoolSize: 1
+        queueCapacity: 1
