@@ -13,7 +13,6 @@ spring:
     driverClassName: org.postgresql.Driver
     testWhileIdle: true
     validationQuery: SELECT 1
-
   security:
     oauth2:
       resourceserver:
