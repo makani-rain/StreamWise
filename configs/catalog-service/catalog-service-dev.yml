@@ -7,3 +7,4 @@ spring:
 logging.level.org.springframework.security: DEBUG
 logging.level.org.keycloak: DEBUG
 logging.level.com.price.streamwise.catalog.config: DEBUG
+logging.level.io.github.resilience4j: DEBUG
