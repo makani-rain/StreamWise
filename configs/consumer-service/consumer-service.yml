@@ -48,9 +48,9 @@ resilience4j:
   ratelimiter:
     instances:
       consumerService:
-        limitForPeriod: 5
-        limitRefreshPeriod: 5000
-        timeoutDuration: 1000ms
+        limitForPeriod: 10
+        limitRefreshPeriod: 10s
+        timeoutDuration: 0
   circuitbreaker:
     instances:
       consumerService:
