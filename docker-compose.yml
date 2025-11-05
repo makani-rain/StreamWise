@@ -41,7 +41,7 @@ services:
     image: price.streamwise/catalog-service:0.0.1-SNAPSHOT
     environment:
       SPRING_CLOUD_BOOTSTRAP_ENABLED: "true"
-      SPRING_PROFILES_ACTIVE: "prod"
+      SPRING_PROFILES_ACTIVE: "dev"
       SERVER_PORT: "8082"
     depends_on:
       database:
@@ -56,7 +56,7 @@ services:
     image: price.streamwise/consumer-service:0.0.1-SNAPSHOT
     environment:
       SPRING_CLOUD_BOOTSTRAP_ENABLED: "true"
-      SPRING_PROFILES_ACTIVE: "prod"
+      SPRING_PROFILES_ACTIVE: "dev"
       SERVER_PORT: "8081"
     depends_on:
       database:

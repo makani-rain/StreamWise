@@ -31,7 +31,7 @@ security.oauth2.client.grant-type: client_credentials
 signing.key: "345345fsdfsf5345"
 
 
-keycloak.realm: spmia-realm
+keycloak.realm: StreamWise
 keycloak.auth-server-url: http://keycloak:8080/
 keycloak.ssl-required: external
 keycloak.resource: streamwise
