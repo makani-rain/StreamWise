@@ -31,7 +31,7 @@
 		<docker.image.prefix>price.streamwise</docker.image.prefix>
 		<spring-cloud.version>2024.0.2</spring-cloud.version>
 		<resilience4j.version>1.5.0</resilience4j.version>
-		<keycloak.version>25.0.3</keycloak.version>
+		<keycloak.version>22.0.5</keycloak.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -130,6 +130,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<!-- Use Spring's OAuth2 Resource Server to validate Keycloak JWTs (stateless) -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
 		</dependency>
 	</dependencies>
 
