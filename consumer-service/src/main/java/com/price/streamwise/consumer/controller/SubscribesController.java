@@ -6,6 +6,8 @@ import com.price.streamwise.consumer.model.Subscribes;
 import com.price.streamwise.consumer.model.SubscribesId;
 import com.price.streamwise.consumer.service.SubscribesService;
 
+import jakarta.annotation.security.RolesAllowed;
+
 import java.util.List;
 
 @RestController
@@ -17,11 +19,13 @@ public class SubscribesController {
         this.service = service;
     }
 
+    @RolesAllowed({ "ADMIN", "USER" })
     @GetMapping
     public List<Subscribes> all() {
         return service.findAll();
     }
 
+    @RolesAllowed({ "ADMIN", "USER" })
     @GetMapping("/{consumerId}/{packageId}")
     public Subscribes get(@PathVariable("consumerId") String consumerId, @PathVariable("packageId") String packageId) {
         SubscribesId id = new SubscribesId();
@@ -30,11 +34,13 @@ public class SubscribesController {
         return service.findById(id);
     }
 
+    @RolesAllowed({ "ADMIN", "USER" })
     @PostMapping
     public Subscribes create(@RequestBody Subscribes s) {
         return service.save(s);
     }
 
+    @RolesAllowed({ "ADMIN", "USER" })
     @DeleteMapping("/{consumerId}/{packageId}")
     public void delete(@PathVariable("consumerId") String consumerId, @PathVariable("packageId") String packageId) {
         SubscribesId id = new SubscribesId();

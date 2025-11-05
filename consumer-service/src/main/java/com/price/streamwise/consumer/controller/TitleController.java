@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import com.price.streamwise.consumer.model.Title;
 import com.price.streamwise.consumer.service.TitleService;
 
+import jakarta.annotation.security.RolesAllowed;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -17,29 +19,34 @@ public class TitleController {
         this.service = service;
     }
 
+    @RolesAllowed({ "ADMIN", "USER" })
     @GetMapping
     public List<Title> all() {
-        return service.findAll();
+        return service.findAllTitles();
     }
 
+    @RolesAllowed({ "ADMIN", "USER" })
     @GetMapping("/{id}")
     public Title get(@PathVariable UUID id) {
-        return service.findById(id);
+        return service.findTitleById(id);
     }
 
+    @RolesAllowed({ "ADMIN", "USER" })
     @PostMapping
     public Title create(@RequestBody Title t) {
-        return service.save(t);
+        return service.addTitle(t);
     }
 
+    @RolesAllowed({ "ADMIN" })
     @PutMapping("/{id}")
     public Title update(@PathVariable UUID id, @RequestBody Title t) {
         t.setTitleId(id);
-        return service.save(t);
+        return service.addTitle(t);
     }
 
+    @RolesAllowed({ "ADMIN" })
     @DeleteMapping("/{id}")
     public void delete(@PathVariable UUID id) {
-        service.delete(id);
+        service.deleteTitle(id);
     }
 }
