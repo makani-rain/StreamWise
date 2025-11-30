@@ -30,7 +30,7 @@
 		<java.version>17</java.version>
 		<docker.image.prefix>price.streamwise</docker.image.prefix>
 		<spring-cloud.version>2024.0.2</spring-cloud.version>
-		<resilience4j.version>1.5.0</resilience4j.version>
+		<resilience4j.version>2.3.0</resilience4j.version>
 		<keycloak.version>22.0.5</keycloak.version>
 	</properties>
 	<dependencies>
@@ -99,7 +99,7 @@
 		</dependency>
 		<dependency>
 		    <groupId>io.github.resilience4j</groupId>
-		    <artifactId>resilience4j-spring-boot2</artifactId>
+		    <artifactId>resilience4j-spring-boot3</artifactId>
 		    <version>${resilience4j.version}</version>
 		</dependency>
 		<dependency>
@@ -111,6 +111,16 @@
 		    <groupId>io.github.resilience4j</groupId>
 		    <artifactId>resilience4j-timelimiter</artifactId>
 		    <version>${resilience4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.resilience4j</groupId>
+			<artifactId>resilience4j-rxjava3</artifactId>
+			<version>${resilience4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.resilience4j</groupId>
+			<artifactId>resilience4j-spring6</artifactId>
+			<version>${resilience4j.version}</version>
 		</dependency>
 		 <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -135,6 +145,27 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-stream</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-stream-kafka</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-tracing-bridge-brave</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.zipkin.reporter2</groupId>
+			<artifactId>zipkin-reporter-brave</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+			<version>7.4</version>
 		</dependency>
 	</dependencies>
 

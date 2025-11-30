@@ -1,6 +1,6 @@
 server:
   port: 8072
-  
+
 eureka:
   instance:
     preferIpAddress: true
@@ -9,32 +9,33 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://eurekaserver:8070/eureka/
-      
+
 spring:
+  zipkin:
+    baseUrl: http://zipkin:9411
+  sleuth:
+    sampler:
+      percentage: 1
   cloud:
     gateway:
-        routes:
+      routes:
         - id: consumer-service
           uri: lb://consumer-service
           predicates:
-          - Path=/consumer/**
+            - Path=/consumer/**
           filters:
-          - RewritePath=/consumer/(?<path>.*), /$\{path}
-          - RemoveRequestHeader= Cookie,Set-Cookie
+            - RewritePath=/consumer/(?<path>.*), /$\{path}
+            - RemoveRequestHeader= Cookie,Set-Cookie
         - id: catalog-service
           uri: lb://catalog-service
           predicates:
-          - Path=/catalog/**
+            - Path=/catalog/**
           filters:
-          - RewritePath=/catalog/(?<path>.*), /$\{path}
-          - RemoveRequestHeader= Cookie,Set-Cookie
-   
-    
+            - RewritePath=/catalog/(?<path>.*), /$\{path}
+            - RemoveRequestHeader= Cookie,Set-Cookie
+
 management:
   endpoints:
     web:
       exposure:
         include: "*"
-        
-        
-        

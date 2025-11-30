@@ -37,36 +37,6 @@ services:
       backend:
         aliases:
           - "configserver"
-  catalogservice:
-    image: price.streamwise/catalog-service:0.0.1-SNAPSHOT
-    environment:
-      SPRING_CLOUD_BOOTSTRAP_ENABLED: "true"
-      SPRING_PROFILES_ACTIVE: "dev"
-      SERVER_PORT: "8082"
-    depends_on:
-      database:
-        condition: service_healthy
-      configserver:
-        condition: service_healthy
-    ports:
-      - "8082:8082"
-    networks:
-      - backend
-  consumerservice:
-    image: price.streamwise/consumer-service:0.0.1-SNAPSHOT
-    environment:
-      SPRING_CLOUD_BOOTSTRAP_ENABLED: "true"
-      SPRING_PROFILES_ACTIVE: "dev"
-      SERVER_PORT: "8081"
-    depends_on:
-      database:
-        condition: service_healthy
-      configserver:
-        condition: service_healthy
-    ports:
-      - "8081:8081"
-    networks:
-      - backend
   eurekaserver:
     image: price.streamwise/eurekaserver:0.0.1-SNAPSHOT
     environment:
@@ -103,6 +73,133 @@ services:
       backend:
         aliases:
           - "gateway"
+  catalogservice:
+    image: price.streamwise/catalog-service:0.0.1-SNAPSHOT
+    environment:
+      SPRING_CLOUD_BOOTSTRAP_ENABLED: "true"
+      SPRING_PROFILES_ACTIVE: "dev"
+      SERVER_PORT: "8082"
+    depends_on:
+      database:
+        condition: service_healthy
+      configserver:
+        condition: service_healthy
+    ports:
+      - "8082:8082"
+    networks:
+      - backend
+  consumerservice:
+    image: price.streamwise/consumer-service:0.0.1-SNAPSHOT
+    environment:
+      SPRING_CLOUD_BOOTSTRAP_ENABLED: "true"
+      SPRING_PROFILES_ACTIVE: "dev"
+      SERVER_PORT: "8081"
+    depends_on:
+      database:
+        condition: service_healthy
+      configserver:
+        condition: service_healthy
+    ports:
+      - "8081:8081"
+    networks:
+      - backend
+  zookeeper:
+    image: wurstmeister/zookeeper:latest
+    container_name: zookeeper
+    ports:
+      - 2181:2181
+    networks:
+      backend:
+        aliases:
+          - "zookeeper"
+  kafkaserver:
+    image: wurstmeister/kafka:latest
+    container_name: kafka
+    ports:
+      - 9092:9092
+    environment:
+      - KAFKA_ADVERTISED_HOST_NAME=kafka
+      - KAFKA_ADVERTISED_PORT=9092
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CREATE_TOPICS=dresses:1:1,ratings:1:1
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    depends_on:
+      - zookeeper
+    networks:
+      backend:
+        aliases:
+          - "kafka"
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    ports:
+    - "8088:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+    networks:
+      backend:
+        aliases:
+          - "kafka-ui"
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
+    container_name: elasticsearch
+    environment:
+      - node.name=elasticsearch
+      - discovery.type=single-node
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    ports:
+      - 9300:9300
+      - 9200:9200
+    networks:
+      backend:
+        aliases:
+          - "elasticsearch"
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.7.0
+    container_name: kibana
+    environment:
+      ELASTICSEARCH_URL: "http://elasticsearch:9300"
+    ports:
+      - 5601:5601
+    networks:
+      backend:
+        aliases:
+          - "kibana"
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.7.0
+    container_name: logstash
+    command: logstash -f /etc/logstash/conf.d/logstash.conf
+    volumes:
+      - ./logstash-config:/etc/logstash/conf.d
+    ports:
+      - "5000:5000"
+    networks:
+      backend:
+        aliases:
+          - "logstash"
+  zipkin: 
+    image: openzipkin/zipkin 
+    container_name: zipkin
+    depends_on: 
+      - elasticsearch
+    environment: 
+      - STORAGE_TYPE=elasticsearch
+      - "ES_HOSTS=elasticsearch:9300"
+    ports:
+      - "9411:9411"
+    networks:
+      backend:
+        aliases:
+          - "zipkin"
   keycloak:
     image: quay.io/keycloak/keycloak:latest
     restart: always
@@ -131,6 +228,8 @@ services:
         aliases:
           - "keycloak"
 volumes:
+  esdata1:
+    driver: local
   pgdata:
     name: pgdata
 
