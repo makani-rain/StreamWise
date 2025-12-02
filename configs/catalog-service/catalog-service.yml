@@ -31,10 +31,9 @@ eureka.client.registerWithEureka: true
 eureka.client.fetchRegistry : true
 eureka.client.serviceUrl.defaultZone: http://eurekaserver:8070/eureka/
 
-spring.cloud.stream.bindings.output.destination: catalogChangeTopic
-spring.cloud.stream.bindings.output.content-type: application/json
-spring.cloud.stream.kafka.binder.zkNodes: kafka
 spring.cloud.stream.kafka.binder.brokers: kafka
+spring.cloud.stream.bindings.catalogChangeTopic-out-0.destination: catalogChangeTopic
+spring.cloud.stream.bindings.catalogChangeTopic-out-0.content-type: application/json
 
 management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
 management.tracing.sampling.probability: 1.0

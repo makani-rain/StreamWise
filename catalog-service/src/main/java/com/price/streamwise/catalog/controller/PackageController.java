@@ -34,14 +34,15 @@ public class PackageController {
     @RolesAllowed({ "ADMIN" })  
     @PostMapping
     public PackageEntity create(@RequestBody PackageEntity p) {
-        return service.save(p);
+        return service.save(p, false);
     }
 
     @RolesAllowed({ "ADMIN" })  
     @PutMapping("/{id}")
     public PackageEntity update(@PathVariable UUID id, @RequestBody PackageEntity p) {
         p.setPackageId(id);
-        return service.save(p);
+        
+        return service.save(p, true);
     }
 
     @RolesAllowed({ "ADMIN" })  

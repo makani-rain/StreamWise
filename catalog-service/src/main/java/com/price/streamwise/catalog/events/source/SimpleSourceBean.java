@@ -20,12 +20,13 @@ public class SimpleSourceBean {
         this.streamBridge = streamBridge;
     }
 
-    public void publishOrganizationChange(ActionEnum action, String organizationId){
-       logger.debug("Sending Kafka message {} for Organization Id: {}", action, organizationId);
+    public void publishCatalogChange(ActionEnum action, String objectType, String id){
+       logger.debug("Sending Kafka message {} for Object Type: {} with Id: {}", action, objectType, id);
         CatalogChangeModel change =  new CatalogChangeModel(
                 CatalogChangeModel.class.getTypeName(),
                 action.toString(),
-                organizationId,
+                objectType,
+                id,
                 UserContextHolder.getContext().getCorrelationId());
 
         streamBridge.send("catalogChangeTopic", change);

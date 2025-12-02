@@ -34,14 +34,14 @@ public class TitleController {
     @RolesAllowed({ "ADMIN" })
     @PostMapping
     public Title create(@RequestBody Title t) {
-        return service.save(t);
+        return service.save(t, false);
     }
 
     @RolesAllowed({ "ADMIN" })
     @PutMapping("/{id}")
     public Title update(@PathVariable UUID id, @RequestBody Title t) {
         t.setTitleId(id);
-        return service.save(t);
+        return service.save(t, true);
     }
 
     @RolesAllowed({ "ADMIN" })

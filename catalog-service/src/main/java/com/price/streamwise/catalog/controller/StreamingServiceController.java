@@ -34,14 +34,14 @@ public class StreamingServiceController {
     @RolesAllowed({ "ADMIN" })  
     @PostMapping
     public StreamingService create(@RequestBody StreamingService s) {
-        return service.save(s);
+        return service.save(s, false);
     }
 
     @RolesAllowed({ "ADMIN" })  
     @PutMapping("/{id}")
     public StreamingService update(@PathVariable UUID id, @RequestBody StreamingService s) {
         s.setServiceId(id);
-        return service.save(s);
+        return service.save(s, true);
     }
 
     @RolesAllowed({ "ADMIN" })  

@@ -35,14 +35,14 @@ public class StreamsController {
     @RolesAllowed({ "ADMIN" })  
     @PostMapping
     public Streams create(@RequestBody Streams s) {
-        return service.save(s);
+        return service.save(s, false);
     }
 
     @RolesAllowed({ "ADMIN" })  
     @PutMapping("/{serviceId}/{titleId}")
     public Streams update(@PathVariable UUID serviceId, @PathVariable UUID titleId, @RequestBody Streams s) {
         s.setId(new StreamsId(serviceId, titleId));
-        return service.save(s);
+        return service.save(s, true);
     }
 
     @RolesAllowed({ "ADMIN" })  

@@ -11,13 +11,20 @@ import org.springframework.web.client.RestTemplate;
 
 import com.price.streamwise.consumer.model.PackageEntity;
 
+import brave.ScopedSpan;
+import brave.Tracer;
+
 @Component
 public class CatalogRestTemplateClient {
     
     @Autowired
     private RestTemplate restTemplate;
 
+	@Autowired
+	Tracer tracer;
+
     public List<PackageEntity> fetchPackages(){
+        ScopedSpan span = tracer.startScopedSpan("fetchPackages-CatalogRestTemplateClient");
         ResponseEntity<List<PackageEntity>> restExchange = 
                 restTemplate.exchange(
                    "http://gateway:8072/catalog/packages",
