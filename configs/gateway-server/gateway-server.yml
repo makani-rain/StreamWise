@@ -10,12 +10,19 @@ eureka:
     serviceUrl:
       defaultZone: http://eurekaserver:8070/eureka/
 
-spring:
+management:
   zipkin:
-    baseUrl: http://zipkin:9411
-  sleuth:
-    sampler:
-      percentage: 1
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
   cloud:
     gateway:
       routes:
@@ -33,9 +40,3 @@ spring:
           filters:
             - RewritePath=/catalog/(?<path>.*), /$\{path}
             - RemoveRequestHeader= Cookie,Set-Cookie
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
