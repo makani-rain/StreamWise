@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\Users\makan\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert
+    kompose.version: 1.37.0 (fb0539e64)
+  labels:
+    io.kompose.service: eurekaserver
+  name: eurekaserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: eurekaserver
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\Users\makan\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert
+        kompose.version: 1.37.0 (fb0539e64)
+      labels:
+        io.kompose.service: eurekaserver
+    spec:
+      containers:
+        - env:
+            - name: SPRING_CLOUD_BOOTSTRAP_ENABLED
+              value: "true"
+          image: warpedphantom/price.streamwise.eurekaserver:0.0.1-SNAPSHOT
+          name: eurekaserver
+          ports:
+            - containerPort: 8070
+              protocol: TCP
+      restartPolicy: Always

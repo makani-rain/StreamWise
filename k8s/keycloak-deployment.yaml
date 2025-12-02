@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\Users\makan\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert
+    kompose.version: 1.37.0 (fb0539e64)
+  labels:
+    io.kompose.service: keycloak
+  name: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: keycloak
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\Users\makan\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert
+        kompose.version: 1.37.0 (fb0539e64)
+      labels:
+        io.kompose.service: keycloak
+    spec:
+      containers:
+        - args:
+            - start-dev
+            - --import-realm
+          env:
+            - name: KC_BOOTSTRAP_ADMIN_PASSWORD
+              value: admin
+            - name: KC_BOOTSTRAP_ADMIN_USERNAME
+              value: admin
+            - name: KC_DB
+              value: postgres
+            - name: KC_DB_PASSWORD
+              value: postgres
+            - name: KC_DB_URL
+              value: jdbc:postgresql://database:5432/streamwise
+            - name: KC_DB_USERNAME
+              value: postgres
+            - name: KC_HOSTNAME_STRICT
+              value: "false"
+            - name: KC_HTTP_ENABLED
+              value: "true"
+            - name: KEYCLOAK_IMPORT
+              value: /opt/keycloak/data/import/realm-export.json
+          image: quay.io/keycloak/keycloak:latest
+          name: keycloak
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /opt/keycloak/data/import/realm-export.json
+              name: keycloak-cm0
+              subPath: realm-export.json
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            items:
+              - key: realm-export.json
+                path: realm-export.json
+            name: keycloak-cm0
+          name: keycloak-cm0

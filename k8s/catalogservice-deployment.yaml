@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\Users\makan\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert
+    kompose.version: 1.37.0 (fb0539e64)
+  labels:
+    io.kompose.service: catalogservice
+  name: catalogservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: catalogservice
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\Users\makan\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert
+        kompose.version: 1.37.0 (fb0539e64)
+      labels:
+        io.kompose.service: catalogservice
+    spec:
+      containers:
+        - env:
+            - name: SERVER_PORT
+              value: "8082"
+            - name: SPRING_CLOUD_BOOTSTRAP_ENABLED
+              value: "true"
+            - name: SPRING_PROFILES_ACTIVE
+              value: dev
+          image: warpedphantom/price.streamwise.catalog-service:0.0.1-SNAPSHOT
+          name: catalogservice
+          ports:
+            - containerPort: 8082
+              protocol: TCP
+      restartPolicy: Always

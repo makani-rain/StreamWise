@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\Users\makan\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert
+    kompose.version: 1.37.0 (fb0539e64)
+  labels:
+    io.kompose.service: gatewayserver
+  name: gatewayserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: gatewayserver
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\Users\makan\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert
+        kompose.version: 1.37.0 (fb0539e64)
+      labels:
+        io.kompose.service: gatewayserver
+    spec:
+      containers:
+        - env:
+            - name: EUREKASERVER_PORT
+              value: "8070"
+            - name: EUREKASERVER_URI
+              value: http://eurekaserver:8070/eureka/
+            - name: PROFILE
+              value: default
+            - name: SERVER_PORT
+              value: "8072"
+            - name: SPRING_CLOUD_BOOTSTRAP_ENABLED
+              value: "true"
+          image: warpedphantom/price.streamwise.gatewayserver:0.0.1-SNAPSHOT
+          name: gatewayserver
+          ports:
+            - containerPort: 8072
+              protocol: TCP
+      restartPolicy: Always

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\Users\makan\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert
+    kompose.version: 1.37.0 (fb0539e64)
+  labels:
+    io.kompose.service: configserver
+  name: configserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: configserver
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\Users\makan\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert
+        kompose.version: 1.37.0 (fb0539e64)
+      labels:
+        io.kompose.service: configserver
+    spec:
+      containers:
+        - env:
+            - name: SERVER_PORT
+              value: "8089"
+            - name: SPRING_PROFILES_ACTIVE
+              value: git
+          image: warpedphantom/price.streamwise.configserver:0.0.1-SNAPSHOT
+          # livenessProbe:
+          #   exec:
+          #     command:
+          #       - curl -f http://localhost:8089/actuator/health || exit 1
+          #   failureThreshold: 5
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          name: configserver
+          ports:
+            - containerPort: 8089
+              protocol: TCP
+      restartPolicy: Always

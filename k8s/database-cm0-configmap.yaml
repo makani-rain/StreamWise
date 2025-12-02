@@ -1,0 +1,241 @@
+apiVersion: v1
+data:
+  init.sql: |
+    \echo === Creating databases ===
+
+    -- Create databases if they don't exist (psql doesn't support CREATE DATABASE IF NOT EXISTS, so drop/recreate to ensure idempotency during development)
+    DROP DATABASE IF EXISTS catalog_db;
+    CREATE DATABASE catalog_db;
+
+    DROP DATABASE IF EXISTS consumer_db;
+    CREATE DATABASE consumer_db;
+
+    DROP DATABASE IF EXISTS catalog_db_dev;
+    CREATE DATABASE catalog_db_dev;
+
+    DROP DATABASE IF EXISTS consumer_db_dev;
+    CREATE DATABASE consumer_db_dev;
+
+    \echo === Creating schemas in each database ===
+
+    -- Create catalog schema in catalog_db
+    \connect catalog_db
+    \echo -- Shared catalog objects (minimal) used by both catalog and consumer DBs
+    CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+    \echo -- Creating table: streaming_service
+    CREATE TABLE IF NOT EXISTS streaming_service (
+      service_id UUID default gen_random_uuid() primary key,
+      name text UNIQUE NOT NULL
+    );
+
+    \echo -- Creating table: title
+    CREATE TABLE IF NOT EXISTS title (
+      title_id UUID default gen_random_uuid() primary key,
+      title_name varchar(128) NOT NULL,
+      type varchar(32),
+      rating varchar(32),
+      release_date varchar(32),
+      category text,
+      creator text,
+      language varchar(64),
+      CONSTRAINT unique_title_release UNIQUE(title_name, type, rating, creator, release_date, language)
+    );
+
+    \echo -- Creating table: package
+    CREATE TABLE IF NOT EXISTS package (
+      package_id UUID default gen_random_uuid() primary key,
+      service_id UUID references streaming_service(service_id) ON DELETE CASCADE,
+      name text,
+      price decimal(6, 2),
+      period int default 1,
+      ad_supported boolean default false,
+      deprecated boolean default false
+    );
+
+    \echo -- Creating table: streams
+    CREATE TABLE IF NOT EXISTS streams (
+      service_id UUID references streaming_service(service_id) ON DELETE CASCADE,
+      title_id UUID references title(title_id) ON DELETE CASCADE,
+      arrival_date bigint,
+      leaving_date bigint,
+      primary key (service_id, title_id)
+    );
+
+    -- Create catalog schema in catalog_db_dev
+    \connect catalog_db_dev
+    \echo -- Shared catalog objects (minimal) used by both catalog and consumer DBs
+    CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+    \echo -- Creating table: streaming_service
+    CREATE TABLE IF NOT EXISTS streaming_service (
+      service_id UUID default gen_random_uuid() primary key,
+      name text UNIQUE NOT NULL
+    );
+
+    \echo -- Creating table: title
+    CREATE TABLE IF NOT EXISTS title (
+      title_id UUID default gen_random_uuid() primary key,
+      title_name varchar(128) NOT NULL,
+      type varchar(32),
+      rating varchar(32),
+      release_date varchar(32),
+      category text,
+      creator text,
+      language varchar(64),
+      CONSTRAINT unique_title_release UNIQUE(title_name, type, rating, creator, release_date, language)
+    );
+
+    \echo -- Creating table: package
+    CREATE TABLE IF NOT EXISTS package (
+      package_id UUID default gen_random_uuid() primary key,
+      service_id UUID references streaming_service(service_id) ON DELETE CASCADE,
+      name text,
+      price decimal(6, 2),
+      period int default 1,
+      ad_supported boolean default false,
+      deprecated boolean default false
+    );
+
+    \echo -- Creating table: streams
+    CREATE TABLE IF NOT EXISTS streams (
+      service_id UUID references streaming_service(service_id) ON DELETE CASCADE,
+      title_id UUID references title(title_id) ON DELETE CASCADE,
+      arrival_date bigint,
+      leaving_date bigint,
+      primary key (service_id, title_id)
+    );
+
+    -- Create consumer schema in consumer_db
+    \connect consumer_db
+    \echo -- Shared catalog objects (minimal) used by both catalog and consumer DBs
+    CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+    \echo -- Creating table: streaming_service
+    CREATE TABLE IF NOT EXISTS streaming_service (
+      service_id UUID default gen_random_uuid() primary key,
+      name text UNIQUE NOT NULL
+    );
+
+    \echo -- Creating table: title
+    CREATE TABLE IF NOT EXISTS title (
+      title_id UUID default gen_random_uuid() primary key,
+      title_name varchar(128) NOT NULL,
+      type varchar(32),
+      rating varchar(32),
+      release_date varchar(32),
+      category text,
+      creator text,
+      language varchar(64),
+      CONSTRAINT unique_title_release UNIQUE(title_name, type, rating, creator, release_date, language)
+    );
+
+    \echo -- Creating table: package
+    CREATE TABLE IF NOT EXISTS package (
+      package_id UUID default gen_random_uuid() primary key,
+      service_id UUID references streaming_service(service_id) ON DELETE CASCADE,
+      name text,
+      price decimal(6, 2),
+      period int default 1,
+      ad_supported boolean default false,
+      deprecated boolean default false
+    );
+    \echo -- Creating table: consumer
+    CREATE TABLE IF NOT EXISTS consumer (
+      consumer_id UUID default gen_random_uuid() primary key,
+      name text NOT NULL,
+      address text,
+      budget decimal(6, 0)
+    );
+
+    \echo -- Creating table: watchlist
+    CREATE TABLE IF NOT EXISTS watchlist (
+      watchlist_id UUID default gen_random_uuid() primary key,
+      consumer_id UUID references consumer(consumer_id) ON DELETE CASCADE
+    );
+
+    \echo -- Creating table: watchlist_item
+    CREATE TABLE IF NOT EXISTS watchlist_item (
+      watchlist_item_id UUID default gen_random_uuid() primary key,
+      watchlist_id UUID references watchlist(watchlist_id) ON DELETE CASCADE,
+      title_id UUID references title(title_id) ON DELETE CASCADE
+    );
+
+    \echo -- Creating table: subscribes
+    CREATE TABLE IF NOT EXISTS subscribes (
+      consumer_id UUID references consumer(consumer_id) ON DELETE CASCADE,
+      package_id UUID references package(package_id) ON DELETE CASCADE,
+      renewal_date date,
+      primary key (consumer_id, package_id)
+    );
+
+
+    -- Create consumer schema in consumer_db_dev
+    \connect consumer_db_dev
+    \echo -- Shared catalog objects (minimal) used by both catalog and consumer DBs
+    CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+    \echo -- Creating table: streaming_service
+    CREATE TABLE IF NOT EXISTS streaming_service (
+      service_id UUID default gen_random_uuid() primary key,
+      name text UNIQUE NOT NULL
+    );
+
+    \echo -- Creating table: title
+    CREATE TABLE IF NOT EXISTS title (
+      title_id UUID default gen_random_uuid() primary key,
+      title_name varchar(128) NOT NULL,
+      type varchar(32),
+      rating varchar(32),
+      release_date varchar(32),
+      category text,
+      creator text,
+      language varchar(64),
+      CONSTRAINT unique_title_release UNIQUE(title_name, type, rating, creator, release_date, language)
+    );
+
+    \echo -- Creating table: package
+    CREATE TABLE IF NOT EXISTS package (
+      package_id UUID default gen_random_uuid() primary key,
+      service_id UUID references streaming_service(service_id) ON DELETE CASCADE,
+      name text,
+      price decimal(6, 2),
+      period int default 1,
+      ad_supported boolean default false,
+      deprecated boolean default false
+    );
+    \echo -- Creating table: consumer
+    CREATE TABLE IF NOT EXISTS consumer (
+      consumer_id UUID default gen_random_uuid() primary key,
+      name text NOT NULL,
+      address text,
+      budget decimal(6, 0)
+    );
+
+    \echo -- Creating table: watchlist
+    CREATE TABLE IF NOT EXISTS watchlist (
+      watchlist_id UUID default gen_random_uuid() primary key,
+      consumer_id UUID references consumer(consumer_id) ON DELETE CASCADE
+    );
+
+    \echo -- Creating table: watchlist_item
+    CREATE TABLE IF NOT EXISTS watchlist_item (
+      watchlist_item_id UUID default gen_random_uuid() primary key,
+      watchlist_id UUID references watchlist(watchlist_id) ON DELETE CASCADE,
+      title_id UUID references title(title_id) ON DELETE CASCADE
+    );
+
+    \echo -- Creating table: subscribes
+    CREATE TABLE IF NOT EXISTS subscribes (
+      consumer_id UUID references consumer(consumer_id) ON DELETE CASCADE,
+      package_id UUID references package(package_id) ON DELETE CASCADE,
+      renewal_date date,
+      primary key (consumer_id, package_id)
+    );
+kind: ConfigMap
+metadata:
+  annotations:
+    use-subpath: "true"
+  labels:
+    io.kompose.service: database
+  name: database-cm0
