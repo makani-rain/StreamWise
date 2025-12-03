@@ -22,6 +22,10 @@ spec:
       labels:
         io.kompose.service: logstash
     spec:
+      tolerations:
+      - key: "CriticalAddonsOnly"
+        operator: "Exists"
+        effect: "NoSchedule"
       containers:
         - args:
             - logstash

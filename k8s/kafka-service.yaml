@@ -5,12 +5,11 @@ metadata:
     kompose.cmd: C:\Users\makan\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert
     kompose.version: 1.37.0 (fb0539e64)
   labels:
-    io.kompose.service: kafkaserver
-  name: kafkaserver
+    io.kompose.service: kafka
+  name: kafka
 spec:
   ports:
-    - name: "9092"
-      port: 9092
+    - port: 9092
       targetPort: 9092
   selector:
-    io.kompose.service: kafkaserver
+    io.kompose.service: kafka-deployment

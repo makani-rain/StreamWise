@@ -20,6 +20,10 @@ spec:
       labels:
         io.kompose.service: gatewayserver
     spec:
+      tolerations:
+      - key: "CriticalAddonsOnly"
+        operator: "Exists"
+        effect: "NoSchedule"
       containers:
         - env:
             - name: EUREKASERVER_PORT
@@ -33,6 +37,7 @@ spec:
             - name: SPRING_CLOUD_BOOTSTRAP_ENABLED
               value: "true"
           image: warpedphantom/price.streamwise.gatewayserver:0.0.1-SNAPSHOT
+          imagePullPolicy: Always
           name: gatewayserver
           ports:
             - containerPort: 8072

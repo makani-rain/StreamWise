@@ -20,6 +20,10 @@ spec:
       labels:
         io.kompose.service: kafka-ui
     spec:
+      tolerations:
+      - key: "CriticalAddonsOnly"
+        operator: "Exists"
+        effect: "NoSchedule"
       containers:
         - env:
             - name: KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS

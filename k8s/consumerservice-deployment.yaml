@@ -20,6 +20,10 @@ spec:
       labels:
         io.kompose.service: consumerservice
     spec:
+      tolerations:
+      - key: "CriticalAddonsOnly"
+        operator: "Exists"
+        effect: "NoSchedule"
       containers:
         - env:
             - name: SERVER_PORT

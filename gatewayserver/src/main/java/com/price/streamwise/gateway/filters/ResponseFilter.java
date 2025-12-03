@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import brave.Tracer;
+import brave.Span;
 import reactor.core.publisher.Mono;
 
 @Configuration
@@ -25,7 +26,8 @@ public class ResponseFilter {
     public GlobalFilter postGlobalFilter() {
         return (exchange, chain) -> {
             return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-            	  String traceId = tracer.currentSpan().context().traceIdString();
+                Span currentSpan = tracer.currentSpan();
+                String traceId = currentSpan != null ? currentSpan.context().traceIdString() : "no-trace";
                 logger.debug("Adding the correlation id to the outbound headers. {}", traceId);
                 exchange.getResponse().getHeaders().add(FilterUtils.CORRELATION_ID, traceId);
                 logger.debug("Completing outgoing request for {}.", exchange.getRequest().getURI());

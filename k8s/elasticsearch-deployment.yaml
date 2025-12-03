@@ -22,6 +22,10 @@ spec:
       labels:
         io.kompose.service: elasticsearch
     spec:
+      tolerations:
+      - key: "CriticalAddonsOnly"
+        operator: "Exists"
+        effect: "NoSchedule"
       containers:
         - env:
             - name: ES_JAVA_OPTS
@@ -41,11 +45,11 @@ spec:
               protocol: TCP
             - containerPort: 9200
               protocol: TCP
-          volumeMounts:
-            - mountPath: /usr/share/elasticsearch/data
-              name: esdata1
+          # volumeMounts:
+          #   - mountPath: /usr/share/elasticsearch/data
+          #     name: esdata1
       restartPolicy: Always
-      volumes:
-        - name: esdata1
-          persistentVolumeClaim:
-            claimName: esdata1
+      # volumes:
+      #   - name: esdata1
+      #     persistentVolumeClaim:
+      #       claimName: esdata1

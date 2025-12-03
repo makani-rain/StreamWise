@@ -22,10 +22,14 @@ spec:
       labels:
         io.kompose.service: keycloak
     spec:
+      tolerations:
+      - key: "CriticalAddonsOnly"
+        operator: "Exists"
+        effect: "NoSchedule"
       containers:
         - args:
             - start-dev
-            - --import-realm
+            # - --import-realm
           env:
             - name: KC_BOOTSTRAP_ADMIN_PASSWORD
               value: admin
@@ -43,22 +47,22 @@ spec:
               value: "false"
             - name: KC_HTTP_ENABLED
               value: "true"
-            - name: KEYCLOAK_IMPORT
-              value: /opt/keycloak/data/import/realm-export.json
+            # - name: KEYCLOAK_IMPORT
+            #   value: /opt/keycloak/data/import/realm-export.json
           image: quay.io/keycloak/keycloak:latest
           name: keycloak
           ports:
             - containerPort: 8080
               protocol: TCP
-          volumeMounts:
-            - mountPath: /opt/keycloak/data/import/realm-export.json
-              name: keycloak-cm0
-              subPath: realm-export.json
+          # volumeMounts:
+          #   - mountPath: /opt/keycloak/data/import/realm-export.json
+          #     name: keycloak-cm0
+          #     subPath: realm-export.json
       restartPolicy: Always
-      volumes:
-        - configMap:
-            items:
-              - key: realm-export.json
-                path: realm-export.json
-            name: keycloak-cm0
-          name: keycloak-cm0
+      # volumes:
+      #   - configMap:
+      #       items:
+      #         - key: realm-export.json
+      #           path: realm-export.json
+      #       name: keycloak-cm0
+      #     name: keycloak-cm0

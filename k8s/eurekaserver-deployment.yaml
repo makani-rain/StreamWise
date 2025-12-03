@@ -20,6 +20,10 @@ spec:
       labels:
         io.kompose.service: eurekaserver
     spec:
+      tolerations:
+      - key: "CriticalAddonsOnly"
+        operator: "Exists"
+        effect: "NoSchedule"
       containers:
         - env:
             - name: SPRING_CLOUD_BOOTSTRAP_ENABLED

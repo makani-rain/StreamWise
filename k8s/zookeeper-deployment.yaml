@@ -20,6 +20,10 @@ spec:
       labels:
         io.kompose.service: zookeeper
     spec:
+      tolerations:
+      - key: "CriticalAddonsOnly"
+        operator: "Exists"
+        effect: "NoSchedule"
       containers:
         - image: wurstmeister/zookeeper:latest
           name: zookeeper
