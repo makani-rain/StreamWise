@@ -1,0 +1,2147 @@
+{
+	"info": {
+		"_postman_id": "2fdccc1a-ec08-4f45-9d20-958decd7131f",
+		"name": "SFWE 510 Project - StreamWise",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23038234"
+	},
+	"item": [
+		{
+			"name": "Health Checks",
+			"item": [
+				{
+					"name": "Config Server Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8089/actuator/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"actuator",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Catalog Service Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator/env",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"env"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consumer Service Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/actuator/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"actuator",
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Catalog Service",
+			"item": [
+				{
+					"name": "Titles - Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/titles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"titles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Titles - Get by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/titles/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"titles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6fbdc123-03ea-42c1-86ac-dcf22aca8d4f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Titles - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"titleName\": \"Example Title\",\n  \"type\": \"movie\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/titles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"titles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Titles - Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"titleName\": \"Updated Title\",\n  \"type\": \"series\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/titles/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"titles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Titles - Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/titles/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"titles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6fbdc123-03ea-42c1-86ac-dcf22aca8d4f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Streaming Services - Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/streaming-services",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"streaming-services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Streaming Services - Get by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/streaming-services/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"streaming-services",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "7a5e6aa8-3db3-4ab6-8759-5ff05143eb7b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Streaming Services - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\": \"Example Service\" }"
+						},
+						"url": {
+							"raw": "http://localhost:8080/streaming-services",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"streaming-services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Streaming Services - Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\": \"Updated Service\" }"
+						},
+						"url": {
+							"raw": "http://localhost:8080/streaming-services/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"streaming-services",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Streaming Services - Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/streaming-services/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"streaming-services",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Packages - Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/packages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"packages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Packages - Get by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/packages/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"packages",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "93dade32-a73f-40e3-bf80-0c307801914f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Packages - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"service\": { \"serviceId\": \"00000000-0000-0000-0000-000000000000\" },\n  \"name\": \"Basic\",\n  \"price\": 9.99,\n  \"period\": 1,\n  \"adSupported\": false,\n  \"deprecated\": false\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/packages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"packages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Packages - Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"service\": { \"serviceId\": \"00000000-0000-0000-0000-000000000000\" },\n  \"name\": \"Pro\",\n  \"price\": 14.99\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/packages/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"packages",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Packages - Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/packages/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"packages",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Streams - Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/streams",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"streams"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Streams - Get by composite id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/streams/:serviceId/:titleId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"streams",
+								":serviceId",
+								":titleId"
+							],
+							"variable": [
+								{
+									"key": "serviceId",
+									"value": "23947a16-bef5-4a91-a3cd-6c23ded8d662"
+								},
+								{
+									"key": "titleId",
+									"value": "b5d69de5-3899-4e08-ae47-d19dd497e055"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Streams - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": { \"serviceId\": \"00000000-0000-0000-0000-000000000000\", \"titleId\": \"11111111-1111-1111-1111-111111111111\" },\n  \"arrival_date\": 1696070400,\n  \"leaving_date\": 1727606400\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/streams",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"streams"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Streams - Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"arrival_date\": 1696070400,\n  \"leaving_date\": 1727606400\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/streams/:serviceId/:titleId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"streams",
+								":serviceId",
+								":titleId"
+							],
+							"variable": [
+								{
+									"key": "serviceId"
+								},
+								{
+									"key": "titleId"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Streams - Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/streams/:serviceId/:titleId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"streams",
+								":serviceId",
+								":titleId"
+							],
+							"variable": [
+								{
+									"key": "serviceId"
+								},
+								{
+									"key": "titleId"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consumer Service",
+			"item": [
+				{
+					"name": "Consumers - Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/consumers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"consumers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consumers - Get by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/consumers/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"consumers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3d5a2c97-5179-436e-84b5-f71c524d4e43"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consumers - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Alice\",\n  \"address\": \"1 Main St\",\n  \"budget\": 100\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/consumers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"consumers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consumers - Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Alice Updated\",\n  \"address\": \"2 Main St\",\n  \"budget\": 150\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/consumers/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"consumers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consumers - Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/consumers/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"consumers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1d31fc7a-05e1-497d-8cfc-e112d108f38a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Titles - Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/titles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"titles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Titles - Get by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/titles/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"titles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "19abdd3b-3281-4a4b-a05a-a44e169ece1b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Titles - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"titleName\": \"Consumer Title\",\n  \"type\": \"movie\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/titles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"titles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Titles - Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"titleName\": \"Updated Consumer Title\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/titles/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"titles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Titles - Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/titles/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"titles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Streaming Services - Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/streaming-services",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"streaming-services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Streaming Services - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\": \"Consumer Service\" }"
+						},
+						"url": {
+							"raw": "http://localhost:8081/streaming-services",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"streaming-services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Packages - Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/packages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"packages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Packages - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"service\": { \"serviceId\": \"00000000-0000-0000-0000-000000000000\" },\n  \"name\": \"Consumer Basic\",\n  \"price\": 4.99\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/packages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"packages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subscribes - Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/subscribes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"subscribes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subscribes - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": { \"consumerId\": \"22222222-2222-2222-2222-222222222222\", \"packageId\": \"33333333-3333-3333-3333-333333333333\" },\n  \"renewal_date\": \"2025-10-01\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/subscribes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"subscribes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Watchlists - Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/watchlists",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"watchlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Watchlists - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"consumer\": { \"consumerId\": \"22222222-2222-2222-2222-222222222222\" }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/watchlists",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"watchlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Watchlist Items - Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/watchlist-items",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"watchlist-items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Watchlist Items - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"watchlist\": { \"watchlistId\": \"44444444-4444-4444-4444-444444444444\" },\n  \"title\": { \"titleId\": \"11111111-1111-1111-1111-111111111111\" }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/watchlist-items",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"watchlist-items"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Config Server Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/gateway-server/dev",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"gateway-server",
+						"dev"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get admin_access_token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse JSON, save tokens to workspace variables, and add assertions",
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"let isJson = true;",
+							"let data = null;",
+							"",
+							"pm.test(\"Response is valid JSON\", function () {",
+							"  try {",
+							"    data = pm.response.json();",
+							"    pm.expect(typeof data).to.equal(\"object\");",
+							"  } catch (e) {",
+							"    isJson = false;",
+							"  }",
+							"  pm.expect(isJson, \"Response body is not valid JSON\").to.be.true;",
+							"});",
+							"",
+							"if (isJson && data) {",
+							"  // Extract values",
+							"  const accessToken = data.access_token;",
+							"  const refreshToken = data.refresh_token;",
+							"  const tokenType = data.token_type;",
+							"  const expiresIn = data.expires_in;",
+							"",
+							"  // Save to workspace (environment) variables",
+							"  if (typeof accessToken !== 'undefined') pm.collectionVariables.set(\"access_token_admin\", accessToken);",
+							"  if (typeof refreshToken !== 'undefined') pm.collectionVariables.set(\"refresh_token_admin\", refreshToken);",
+							"  if (typeof tokenType !== 'undefined') pm.collectionVariables.set(\"token_type_admin\", tokenType);",
+							"  if (typeof expiresIn !== 'undefined') pm.collectionVariables.set(\"access_token_expires_in_admin\", String(expiresIn));",
+							"",
+							"  // Assert access_token exists and is non-empty",
+							"  pm.test(\"access_token is present and non-empty\", function () {",
+							"    pm.expect(accessToken, \"access_token missing\").to.exist;",
+							"    pm.expect(String(accessToken).length, \"access_token is empty\").to.be.greaterThan(0);",
+							"  });",
+							"} else {",
+							"  // If JSON parsing failed, still surface a clear failing test for token presence",
+							"  pm.test(\"access_token is present and non-empty\", function () {",
+							"    pm.expect(false, \"Cannot validate access_token because response is not JSON\").to.be.true;",
+							"  });",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "streamwise",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret}}",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{admin_user}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{admin_user_pwd}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://keycloak:8080/realms/:realm-name/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"keycloak"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						":realm-name",
+						"protocol",
+						"openid-connect",
+						"token"
+					],
+					"variable": [
+						{
+							"key": "realm-name",
+							"value": "StreamWise"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user_access_token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse JSON, save tokens to workspace variables, and add assertions\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let isJson = true;\r",
+							"let data = null;\r",
+							"\r",
+							"pm.test(\"Response is valid JSON\", function () {\r",
+							"  try {\r",
+							"    data = pm.response.json();\r",
+							"    pm.expect(typeof data).to.equal(\"object\");\r",
+							"  } catch (e) {\r",
+							"    isJson = false;\r",
+							"  }\r",
+							"  pm.expect(isJson, \"Response body is not valid JSON\").to.be.true;\r",
+							"});\r",
+							"\r",
+							"if (isJson && data) {\r",
+							"  // Extract values\r",
+							"  const accessToken = data.access_token;\r",
+							"  const refreshToken = data.refresh_token;\r",
+							"  const tokenType = data.token_type;\r",
+							"  const expiresIn = data.expires_in;\r",
+							"\r",
+							"  // Save to workspace (environment) variables\r",
+							"  if (typeof accessToken !== 'undefined') pm.collectionVariables.set(\"access_token_user\", accessToken);\r",
+							"  if (typeof refreshToken !== 'undefined') pm.collectionVariables.set(\"refresh_token_user\", refreshToken);\r",
+							"  if (typeof tokenType !== 'undefined') pm.collectionVariables.set(\"token_type_user\", tokenType);\r",
+							"  if (typeof expiresIn !== 'undefined') pm.collectionVariables.set(\"access_token_expires_in_user\", String(expiresIn));\r",
+							"\r",
+							"  // Assert access_token exists and is non-empty\r",
+							"  pm.test(\"access_token is present and non-empty\", function () {\r",
+							"    pm.expect(accessToken, \"access_token missing\").to.exist;\r",
+							"    pm.expect(String(accessToken).length, \"access_token is empty\").to.be.greaterThan(0);\r",
+							"  });\r",
+							"} else {\r",
+							"  // If JSON parsing failed, still surface a clear failing test for token presence\r",
+							"  pm.test(\"access_token is present and non-empty\", function () {\r",
+							"    pm.expect(false, \"Cannot validate access_token because response is not JSON\").to.be.true;\r",
+							"  });\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "streamwise",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret}}",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{basic_user}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{basic_user_pwd}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://keycloak:8080/realms/:realm-name/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"keycloak"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						":realm-name",
+						"protocol",
+						"openid-connect",
+						"token"
+					],
+					"variable": [
+						{
+							"key": "realm-name",
+							"value": "StreamWise"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(user) Consumer:Consumers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8072/consumer/consumers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"consumer",
+						"consumers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(user) Consumer:Consumers:Create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Alice\",\r\n  \"address\": \"1 Main St\",\r\n  \"budget\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8072/consumer/consumers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"consumer",
+						"consumers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(user) Consumer:Consumers:Delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8072/consumer/consumers/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"consumer",
+						"consumers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "3fcf3078-a8cb-4205-88e8-925db95b3fe6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(admin) Consumer:Consumers:Delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8072/consumer/consumers/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"consumer",
+						"consumers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6f7577dd-c873-483e-a3c6-9c4e26888d91"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(user) Catalog:Streaming-Services",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8072/catalog/streaming-services",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"catalog",
+						"streaming-services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(admin) Catalog:Packages",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"service\": { \"serviceId\": \"39de1f82-6d3b-4877-976d-f6c5e9be180c\" },\n  \"name\": \"Basic\",\n  \"price\": 9.99,\n  \"period\": 1,\n  \"adSupported\": false,\n  \"deprecated\": false\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8072/catalog/packages",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"catalog",
+						"packages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(admin) Catalog:Packages",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"service\": { \"serviceId\": \"9ae6aeca-4c13-495b-a9fe-5047f09bc2c6\" },\n  \"name\": \"IP\",\n  \"price\": 9.99,\n  \"period\": 1,\n  \"adSupported\": true,\n  \"deprecated\": false\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8072/catalog/packages",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"catalog",
+						"packages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Gateway (user) - Catalog:Packages",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8072/catalog/packages",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"catalog",
+						"packages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Gateway (user) - Consumer:Packages:Refresh",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8072/consumer/packages/refresh",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"consumer",
+						"packages",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Gateway (admin) - Consumer:Packages:Refresh",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8072/consumer/packages/refresh",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"consumer",
+						"packages",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Gateway (user) - Consumer:Packages",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8072/consumer/packages",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"consumer",
+						"packages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Gateway (user) - Catalog:Titles",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8072/catalog/titles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"catalog",
+						"titles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Gateway (user) - Catalog:Titles:Create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titleName\": \"Test Title\",\r\n  \"type\": \"movie\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8072/catalog/titles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"catalog",
+						"titles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Gateway (admin) - Catalog:Titles:Create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titleName\": \"Test Title\",\r\n  \"type\": \"movie\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8072/catalog/titles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"catalog",
+						"titles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Gateway (user) - Catalog:Titles:Delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titleName\": \"Test Title\",\r\n  \"type\": \"movie\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8072/catalog/titles/:titleId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"catalog",
+						"titles",
+						":titleId"
+					],
+					"variable": [
+						{
+							"key": "titleId",
+							"value": "0c8abbaa-23b1-4488-8638-5800a9001894"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Gateway (admin) - Catalog:Titles:Delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titleName\": \"Test Title\",\r\n  \"type\": \"movie\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8072/catalog/titles/:titleId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"catalog",
+						"titles",
+						":titleId"
+					],
+					"variable": [
+						{
+							"key": "titleId",
+							"value": "0c8abbaa-23b1-4488-8638-5800a9001894"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RateLimiter Test w/Script - Consumer:Titles",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Circuit Breaker Trigger Script",
+							"// This script will rapidly send the same request multiple times to trigger the backend circuit breaker.",
+							"// Adjust 'repeatCount' as needed to match your backend's circuit breaker threshold.",
+							"",
+							"const repeatCount = 50; // Number of times to send the request rapidly",
+							"const delayMs = 1; // Delay between requests in milliseconds (reduce for more rapid calls)",
+							"",
+							"const requestOptions = {",
+							"    url: pm.request.url.toString(),",
+							"    method: pm.request.method,",
+							"    header: pm.request.headers.toObject(),",
+							"    body: pm.request.body ? pm.request.body.toString() : undefined",
+							"};",
+							"",
+							"let responses = [];",
+							"",
+							"function sendRepeatedRequests(count) {",
+							"    if (count === 0) {",
+							"        // All requests sent, visualize results",
+							"        pm.visualizer.set(",
+							"            `<style>",
+							"  .results { border-collapse: collapse; }",
+							"  .results, .results th, .results td {",
+							"    background: #ccc;",
+							"    color: #000;",
+							"    border: 1px solid #000;",
+							"  }",
+							"  .results th, .results td { padding: 4px; }",
+							"</style>",
+							"",
+							"<table class=\"results\">",
+							"  <tr><th>Attempt</th><th>Status</th><th>Response Time (ms)</th><th>titleName</th></tr>",
+							"  {{#each responses}}",
+							"  <tr>",
+							"    <td>{{@index}}</td>",
+							"    <td>{{this.code}}</td>",
+							"    <td>{{this.responseTime}}</td>",
+							"    <td>{{this.titleName}}</td>",
+							"  </tr>",
+							"  {{/each}}",
+							"</table>`,",
+							"            { responses }",
+							"        );",
+							"        return;",
+							"    }",
+							"    pm.sendRequest(requestOptions, function (err, res) {",
+							"        responses.push({",
+							"            code: res ? res.code : (err ? err.message : 'Unknown'),",
+							"            responseTime: res ? res.responseTime : null,",
+							"            titleName: res ? res.json()[0]?.titleName : null",
+							"        });",
+							"        setTimeout(function () {",
+							"            sendRepeatedRequests(count - 1);",
+							"        }, delayMs);",
+							"    });",
+							"}",
+							"",
+							"// Only run this script if it's the first test iteration",
+							"if (pm.info.iteration === 0) {",
+							"    sendRepeatedRequests(repeatCount);",
+							"} else {",
+							"    pm.test('Circuit breaker test skipped on non-initial iteration', function () {",
+							"        pm.expect(true).to.be.true;",
+							"    });",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8072/consumer/titles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"consumer",
+						"titles"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "client_secret",
+			"value": ""
+		},
+		{
+			"key": "admin_user",
+			"value": ""
+		},
+		{
+			"key": "basic_user",
+			"value": ""
+		},
+		{
+			"key": "admin_user_pwd",
+			"value": ""
+		},
+		{
+			"key": "basic_user_pwd",
+			"value": ""
+		},
+		{
+			"key": "access_token_admin",
+			"value": ""
+		},
+		{
+			"key": "refresh_token_admin",
+			"value": ""
+		},
+		{
+			"key": "token_type_admin",
+			"value": ""
+		},
+		{
+			"key": "access_token_expires_in_admin",
+			"value": ""
+		},
+		{
+			"key": "access_token_user",
+			"value": ""
+		},
+		{
+			"key": "refresh_token_user",
+			"value": ""
+		},
+		{
+			"key": "token_type_user",
+			"value": ""
+		},
+		{
+			"key": "access_token_expires_in_user",
+			"value": ""
+		},
+		{
+			"key": "totalRequests",
+			"value": ""
+		},
+		{
+			"key": "concurrency",
+			"value": ""
+		},
+		{
+			"key": "delayMs",
+			"value": ""
+		}
+	]
+}
